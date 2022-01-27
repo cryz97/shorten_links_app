@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shorten_links_app/home_page.dart';
+import 'package:shorten_links_app/ui/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,10 +8,10 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Shorten links',
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
