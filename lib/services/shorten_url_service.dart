@@ -6,7 +6,7 @@ import 'package:shorten_links_app/models/shorten_url.dart';
 class ShortenUrlService {
   static String baseApiUrl = 'https://url-shortener-nu.herokuapp.com/api/alias';
   static Map<String, String> baseHeaders = <String, String>{
-    'Content-Type:': 'application/json; charset=UTF-8',
+    'Content-Type': 'application/json; charset=UTF-8',
   };
 
   static Future<ShortenUrl> createUrlAlias(String urlToShort) async {
