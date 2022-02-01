@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:shorten_links_app/models/shorten_url.dart';
@@ -9,19 +10,36 @@ class ShortenUrlService {
     'Content-Type': 'application/json; charset=UTF-8',
   };
 
-  static Future<ShortenUrl> createUrlAlias(String urlToShort) async {
-    final response = await http.post(
-      Uri.parse(baseApiUrl),
-      headers: baseHeaders,
-      body: jsonEncode(<String, String>{
-        'url': urlToShort,
-      }),
-    );
+  static Future<ShortenUrl> createUrlAlias(
+      String urlToShort, http.Client httpClient) async {
+    http.Response response;
 
-    if (response.statusCode == 200) {
-      return ShortenUrl.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to shorten url');
+    try {
+      response = await httpClient.post(
+        Uri.parse(baseApiUrl),
+        headers: baseHeaders,
+        body: jsonEncode(<String, String>{
+          'url': urlToShort,
+        }),
+      );
+      final responseBody = response.body;
+      final responseCode = response.statusCode;
+      switch (responseCode) {
+        case 200:
+          return ShortenUrl.fromJson(jsonDecode(responseBody));
+        case 400:
+          throw HttpException('Invalid Request : $responseBody');
+        case 401:
+        case 403:
+          throw HttpException('Unauthorized : $responseBody');
+        case 415:
+          throw HttpException('Unsupported Media Type : $responseBody');
+        case 500:
+        default:
+          throw HttpException('$responseCode : $responseBody');
+      }
+    } on SocketException {
+      throw const SocketException('No internet connection');
     }
   }
 }
