@@ -10,16 +10,20 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final urlBloc = ShortenUrlBloc();
     return Scaffold(
+        key: const Key('mainScaffold'),
         appBar: AppBar(
           title: const Text("Shorten Links"),
         ),
         body: Column(
+          key: const Key('mainScaffoldBody'),
           children: [
             InputRow(
               urlBloc: urlBloc,
             ),
-            ListViewUrl(
-              urlBloc: urlBloc,
+            Expanded(
+              child: ListViewUrl(
+                urlBloc: urlBloc,
+              ),
             )
           ],
         ));

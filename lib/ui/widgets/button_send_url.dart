@@ -20,6 +20,7 @@ class ButtonSendUrl extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.20,
       height: 60,
       child: ElevatedButton(
+          key: const Key('mainButton'),
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25.0),

@@ -11,6 +11,7 @@ class TextFieldUrl extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.70,
       child: TextField(
+        key: const Key('mainTextField'),
         decoration: const InputDecoration(
             border: OutlineInputBorder(), hintText: 'Enter a URL to short'),
         controller: textController,

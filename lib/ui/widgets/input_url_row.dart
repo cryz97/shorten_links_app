@@ -14,6 +14,7 @@ class InputRow extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
       child: Row(
+        key: const Key('RowTop'),
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

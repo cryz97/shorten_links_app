@@ -10,20 +10,19 @@ class ListViewUrl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final urlList = [];
-    return Expanded(
-      child: StreamBuilder(
-        stream: urlBloc.getUrlList,
-        builder: (BuildContext context, AsyncSnapshot<ShortenUrl> snapshot) {
-          if (snapshot.hasData) {
-            urlList.add(snapshot.data);
-          }
-          return ListView.builder(
-              itemCount: urlList.length,
-              itemBuilder: (BuildContext context, i) {
-                return ItemUrl(shortenUrl: (urlList[i]));
-              });
-        },
-      ),
+    return StreamBuilder(
+      key: const Key('mainStreamBuilder'),
+      stream: urlBloc.getUrlList,
+      builder: (BuildContext context, AsyncSnapshot<ShortenUrl> snapshot) {
+        if (snapshot.hasData) {
+          urlList.add(snapshot.data);
+        }
+        return ListView.builder(
+            itemCount: urlList.length,
+            itemBuilder: (BuildContext context, i) {
+              return ItemUrl(shortenUrl: (urlList[i]));
+            });
+      },
     );
   }
 }

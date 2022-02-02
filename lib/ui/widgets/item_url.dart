@@ -9,6 +9,7 @@ class ItemUrl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      key: const Key('itemListUrlCard'),
       child: ListTile(
         leading: Text(shortenUrl.alias),
         title: Text(shortenUrl.links.self),
